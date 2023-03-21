@@ -81,7 +81,6 @@ class LinkedList:
         result = ''
         for i in element:
             result = result + i + '\u0336'
- #       lista.replace(index, result)
         lista.insert(index, result)
         lista.remove(element)
         return lista.show()
