@@ -4,7 +4,7 @@ class LinkedList:
     def __init__(self):
         self.head = None
         self.size = 0
-
+#função para adicionar elementos ao fim da lista
     def append(self, element):
         self.element = element
         #add quando a lista já possui head
@@ -17,7 +17,7 @@ class LinkedList:
         else:
             self.head = Node(element)
         self.size += 1
-    
+#Função para ler tamanho de lista e retornar   
     def __len__(self):
         #retorna o tamanho da lista
         return self.size
@@ -29,7 +29,7 @@ class LinkedList:
             else:
                 raise IndexError("List index out of range")
         return pointer
-    
+#funções para poder utilizar a lista encadeada como se fosse uma lista normal    
     def __getitem__(self, index):
         # a = lista[6]
         pointer = self._getnode(index)
@@ -43,7 +43,7 @@ class LinkedList:
         if pointer:
             pointer.data = element
         raise IndexError("list index out of range")     
-    
+#função que lê endereço de determinado elemento    
     def index(self, element):
         pointer = self.head
         i = 0
@@ -54,10 +54,8 @@ class LinkedList:
                 pointer = pointer.next
                 i += 1
         raise ValueError("{} is not in list" .format(element))
-# mostra todas as tarefas listadas
 
-
-
+#Função para inserir elementos dentro da lista em qualquer posição desde que não seja maior que o len(lista)
     def insert(self, index, element ):
         node = Node(element)
         if index == 0:
@@ -70,7 +68,7 @@ class LinkedList:
         self._size = self.size +  1    
                    
 
-        
+#Função para printar todos os elementos da lista em ordem       
     def show(self):
         c = 0
         print('-----lista de atividades-----\n')
@@ -78,15 +76,16 @@ class LinkedList:
               
             print(f'{c}- {i}')
             c = c + 1
-
+#função para confirmar que uma tarefa foi feita
     def check(self, index, element):
         result = ''
-        for c in element:
-            result = result + c + '\u0336'
+        for i in element:
+            result = result + i + '\u0336'
  #       lista.replace(index, result)
         lista.insert(index, result)
         lista.remove(element)
         return lista.show()
+#função para remover itens de dentro da lista
     def remove(self, elem):
         if self.head == None:
             raise ValueError("{} is not in list" .format(elem))
@@ -106,12 +105,15 @@ class LinkedList:
 
 
         
+#lista pré-definida
 
 lista = LinkedList()
 lista.append('Lavar o carro')
 lista.append('Jogar lixo')
 lista.append('varrer casa')
 lista.append('correr')
+
+#loop de menu
 
 while True:
     entrada = input("\n\n---TO DO LIST---\n\n  Menu:\n1- Adicionar na lista\n2- Atividade feita\n3- Mostrar lista\n0- Sair\n")
