@@ -5,7 +5,8 @@ class LinkedList:
         self.head = None
         self.size = 0
 #função para adicionar elementos ao fim da lista
-    def append(self, element):
+    def append(self, element, priori):
+        self.prioridade = priori
         self.element = element
         #add quando a lista já possui head
         if self.head:
@@ -17,6 +18,25 @@ class LinkedList:
         else:
             self.head = Node(element)
         self.size += 1
+        if self.prioridade == 1:
+            lista.insert(0, self.element)
+        elif self.prioridade == 2:
+            pass
+        elif self.prioridade == 3:
+            lista.insert(len(lista)-1,self.element)
+        
+    def priority(self,element, priori):
+        self.element = element
+        self.prioridade = priori   
+        if self.prioridade == 1:
+            lista.remove(self.element)
+            lista.insert(0,self.element)
+        elif self.prioridade == 3:
+            lista.remove(self.element)
+            lista.insert(len(lista)-1, self.element)
+        elif self.prioridade == 2:
+           pass
+
 #Função para ler tamanho de lista e retornar   
     def __len__(self):
         #retorna o tamanho da lista
@@ -82,8 +102,9 @@ class LinkedList:
         for i in element:
             result = result + i + '\u0336'
  #       lista.replace(index, result)
-        lista.insert(index, result)
+        lista.insert(len(lista), result)
         lista.remove(element)
+        
         return lista.show()
 #função para remover itens de dentro da lista
     def remove(self, elem):
@@ -101,40 +122,28 @@ class LinkedList:
                 else:
                     ancestor = pointer
                     pointer = pointer.next
-    def priori(self, element):
-        self.element = element
-        if self.element == lista[0]:
-            pass
-        else:
-            lista.remove(self.element)
-            lista.insert(0, self.element.upper())
-            
+ 
 
-
-        
-#lista pré-definida
 
 lista = LinkedList()
-lista.append('Lavar o carro')
-lista.append('Jogar lixo')
-lista.append('varrer casa')
-lista.append('correr')
 
-#loop de menu
+#loop do menu:
+
 
 while True:
-    entrada = input("\n---TO DO LIST---\n\nMenu:\n1- Adicionar na lista\n2- Atividade feita\n3- Mostrar lista\n4- Alterar prioridade de atividade\n0- Sair\n")
+    entrada = input("\n---TO DO LIST---\n\nMenu:\n1- Adicionar na lista\n2- Atividade feita\n3- Mostrar lista\n4- Alterar prioridade de atividade\n0- Sair\n\n")
 
     if entrada ==  "1":
-        entrada_append = input("Digite a atividade a  ser adicionada:")
+        entrada_append = input("Digite a atividade a  ser adicionada: ").lower()
+        prioridade = input("Digite o nível de prioridade do item, sendo 1 o mais alto e 3 o mais baixo: ")
         print('\n')
-        lista.append(entrada_append)
+        lista.append(entrada_append,prioridade)
         lista.show()
         print('\n')
     elif entrada == "2":
         print('\n')
         entrada_index = int(input("Digite o índice da atividade finalizada:"))
-        entrada_element = input("Digite a atividade a que foi completada:")
+        entrada_element = input("Digite a atividade a que foi completada:").lower()
         lista.check(entrada_index, entrada_element)
         print('\n')
     elif entrada == "3":
@@ -143,8 +152,9 @@ while True:
         print('\n')
     elif entrada == "4":
         print('\n')
-        entrada_elemento_priori = input("digite o elemento a ser alterado a prioridade: ")
-        lista.priori(entrada_elemento_priori)
+        entrada = input("digite o elemento a ser alterado a prioridade: ").lower()
+        prioridade = int(input("digite o nível de prioridade do item, sendo 1 o mais alto e 3 o mais baixo: "))
+        lista.priority(entrada,prioridade)
         lista.show()
         print('\n')
 
